@@ -233,14 +233,10 @@ void MainWindow::open()
     }
     if(filename.isEmpty() || filename.isNull()) return;
     //Remember the last folder
-    lastDir.clear();
-    lastDir.append(filename);
-    int filenameChars = 0;
-    for(int i = filename.count()-1; filename.at(i) != QDir::separator(); i--)
-    {
-        filenameChars++; //Count how many characters are in the filename
-    }
-    lastDir.remove(lastDir.count()-filenameChars, filenameChars);//remove filename
+    QFileInfo fileInfo(filename);
+
+    lastDir = fileInfo.absolutePath();
+
     gfile.setFileName(filename);
     if(!recentFiles.contains(filename))
     {

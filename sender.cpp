@@ -204,7 +204,7 @@ void Sender::receivedResend(int r)
 
 void Sender::receivedData()
 {
-    if(printer->canReadLine())
+    while( printer->canReadLine() )
     {
         QByteArray data = printer->readLine();
         if(data == "") return;
